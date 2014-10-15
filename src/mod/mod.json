@@ -1,0 +1,4 @@
+{
+    "main": "hello_pong.groovy",
+    "includes" : "io.vertx~lang-groovy~2.1.0-final"
+}
