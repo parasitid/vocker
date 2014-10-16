@@ -21,8 +21,9 @@ modname=$1
 output=$builddir/$modname.zip
 src=$dir_name/src/mod
 
+# if no VERTX_HOME is defined, try a guess with a gvm install
 if [ "$VERTX_HOME" == "" ]; then 
-    VERTX_HOME="~/.gvm/vertx/${VERTX_VERSION}"
+    VERTX_HOME="~/.gvm/vertx/${VERTX_VERSION:-current}"
 fi
 
 if [ ! -x $VERTX_HOME/bin/vertx ]; then
@@ -30,6 +31,7 @@ if [ ! -x $VERTX_HOME/bin/vertx ]; then
     _exit 1
 else
     VERTX=$VERTX_HOME/bin/vertx
+    VERTX_VERSION=$( $VERTX version 2>&1 | awk '{print $1}')
 fi
 
 if [ -d $src ] && [ -f $src/mod.json ]; then
