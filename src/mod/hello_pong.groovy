@@ -1,4 +1,4 @@
-if ( ! container.env["isten_port"] ){
+if ( ! container.env["listen_port"] ){
   container.logger.error("no port specified. exiting prematurely")
   container.exit()
 }

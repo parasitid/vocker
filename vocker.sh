@@ -7,6 +7,7 @@
 source $(dirname $0)/.envrc
 
 SHUTDOWN_WAIT=20
+VERTICLE_VERSION=${2:-latest}
 
 docker_image() {
     echo "${VERTICLE_NAME%~*}/${VERTICLE_NAME#*~}:${VERTICLE_VERSION}"
@@ -68,7 +69,8 @@ stop() {
 
 case $1 in
 start)
-  start
+  shift 
+  start $*
 ;; 
 stop)   
   stop
