@@ -17,7 +17,7 @@ verticle_ip() {
 }
 
 verticle_port() {
-    echo $(grep EXPOSE Dockerfile | awk '{print $2}')
+    echo $VERTICLE_PORT
 }
 
 verticle_pid() {

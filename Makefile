@@ -23,7 +23,7 @@ build-scripts:
 	./build-scripts.sh
 
 build: build-mod build-scripts
-	docker build -t $(IMAGENAME) --rm=true .
+	./build-docker-img.sh $(IMAGENAME)
 
 tag_latest:
 	docker tag $(IMAGENAME) $(NAME):latest
