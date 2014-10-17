@@ -6,7 +6,7 @@ IMAGENAME = "$(NAME):$(VERSION)"
 REGISTRY = $(DOCKER_REGISTRY_ENDPOINT)
 
 
-.PHONY: all build tag_latest release
+.PHONY: all build install release
 
 all: build
 
@@ -24,10 +24,11 @@ build-mod:
 build-scripts:
 	./build-scripts.sh
 
-build-img: build-mod build-scripts
+build: build-mod build-scripts
 	./build-docker-img.sh $(NAME):latest
 
-install: build-img
+install: 
+	@if ! docker images $(NAME) | awk '{ print $$2 }' | grep -q -F "latest"; then echo "$(NAME) is not yet built. Please run 'make build'"; false; fi
 	docker push $(REGISTRY)/$(NAME):latest
 
 release: install
