@@ -12,7 +12,11 @@ vocker
   * direnv, but not mandatory 
 
 ### Usage
-  * $ make build-img
+  * $ make
     builds docker image ready to work with vertx (including verticle deps)
+
+  * $ make install 
+    install the latest built image on your defined docker registry (cf:[.envrc:DOCKER_REGISTRY_ENDPOINT])
+
   * $ ./vocker.sh start
     launches image with ping pong verticle sample
