@@ -5,7 +5,6 @@ VERSION = $(VERTICLE_VERSION)
 IMAGENAME = "$(NAME):$(VERSION)"
 REGISTRY = $(DOCKER_REGISTRY_ENDPOINT)
 
-
 .PHONY: all build install release
 
 all: build
@@ -28,11 +27,12 @@ build: build-mod build-scripts
 	./build-docker-img.sh $(NAME):latest
 
 install: 
-	@if ! docker images $(NAME) | awk '{ print $$2 }' | grep -q -F "latest"; then echo "$(NAME) is not yet built. Please run 'make build'"; false; fi
+	docker tag $(NAME):latest $(REGISTRY)/$(NAME):latest
+	@if ! docker images $(REGISTRY)/$(NAME) | awk '{ print $$2 }' | grep -q -F "latest"; then echo "$(NAME) is not yet built. Please run 'make'"; false; fi
 	docker push $(REGISTRY)/$(NAME):latest
 
-release: install
+release: 
 	docker tag $(NAME):latest $(REGISTRY)/$(NAME):$(VERSION)
-	@if ! docker images $(NAME) | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME) version $(VERSION) is not yet built. Please run 'make build'"; false; fi
+	@if ! docker images $(REGISTRY)/$(NAME) | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME) version $(VERSION) is not yet built. Please runv 'make'"; false; fi
 	docker push $(REGISTRY)/$(NAME):$(VERSION)
 	@echo "*** Don't forget to create a tag. git tag rel-$(VERSION) && git push origin rel-$(VERSION)"

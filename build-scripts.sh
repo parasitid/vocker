@@ -8,8 +8,10 @@ source ${dir_name}/.envrc
 src=${dir_name}/src/scripts
 builddir=${dir_name}/build/scripts
 
+if [ ! -d $builddir ]; then 
+    mkdir -p $builddir
+fi
 
-mkdir -p $builddir
 for s in $(find $src -name "*.sh"); do
     # simple templating system based on perl; replaces {{FOO}} by $FOO
     # env var.'s value if it exists
