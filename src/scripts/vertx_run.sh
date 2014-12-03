@@ -8,4 +8,4 @@ if [ ! -x $JAVA_HOME/bin/javac ]; then
    exit 1
 fi
 
-/root/.gvm/vertx/{{ VERTX_VERSION }}/bin/vertx runzip /opt/{{ VERTICLE_NAME }}~{{ VERTICLE_VERSION }}.zip
+/root/.gvm/vertx/{{ VERTX_VERSION }}/bin/vertx runzip /opt/{{ VERTICLE_NAME }}~{{ VERTICLE_VERSION }}.zip -cluster

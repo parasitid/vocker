@@ -7,5 +7,6 @@ PORT = container.env["listen_port"] as Integer
 
 vertx.createHttpServer().requestHandler { req ->
   container.logger.info("received req: ${req}")
-  req.response.end "hello"
+  def name = req.params['name']
+  req.response.end "hello ${name}"
 }.listen(PORT)
