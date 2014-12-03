@@ -1,4 +1,4 @@
-FROM    ubuntu:14.04
+FROM    ubuntu:14.10
 
 # install system
 RUN     apt-get update && apt-get install -y zip unzip curl openjdk-8-jdk
