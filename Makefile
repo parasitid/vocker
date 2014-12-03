@@ -24,6 +24,7 @@ build-scripts:
 	./build-scripts.sh
 
 build: build-mod build-scripts
+#        @echo "building $(NAME):latest docker image"
 	./build-docker-img.sh $(NAME):latest
 
 install: 
